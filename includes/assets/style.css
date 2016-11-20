@@ -1,0 +1,14 @@
+/* 
+    Created on : Aug 31, 2016, 7:50:48 AM
+    Author     : Donovan Maidens <donovan@anomalous.co.za>
+*/
+
+#login h1 a { 
+    background-image: url("img/Admin_Logo.png") !important; 
+    background-size: 312px;
+    width: 100%;
+}
+        
+body.login {
+    background: #ffffff;	
+} 
