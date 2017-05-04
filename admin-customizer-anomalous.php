@@ -2,17 +2,17 @@
 
 /**
  *
- * @link              http://www.anomalous.co.za
+ * @link              https://wpza.co.za
  * @since             1.0.0
  * @package           wordpress-admin-customizer
  *
  * @wordpress-plugin
  * Plugin Name:       WordPress Admin Customizer
- * Plugin URI:        http://www.anomalous.co.za
+ * Plugin URI:        https://github.com/djm56/WordPress-Admin-Customizer
  * Description:       Some simple changes to Admin, Login Logo, Admin Copyright and other simple changes.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Donovan Maidens
- * Author URI:        http://www.anomalous.co.za
+ * Author URI:        https://wpza.co.za
  */
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
@@ -32,6 +32,7 @@ if(!class_exists("AdminCustomizerAnomalousPlugin"))
         public function __construct()
         {
             require_once(sprintf("%s/includes/custom-admin.php", dirname(__FILE__)));
+            require_once(sprintf("%s/includes/cutom-options.php", dirname(__FILE__)));
         } // END public function __construct()
 
         /**
@@ -39,7 +40,17 @@ if(!class_exists("AdminCustomizerAnomalousPlugin"))
          */
         public static function activate()
         {
-            // Do something
+            $tmp = get_option('wac_settings');
+            if(($tmp['wac_text_field_3']=='Yes')||(!is_array($tmp))) {
+                $arr = array(
+                    "wac_text_field_0"=>"WPZA", 
+                    "wac_text_field_1"=>"", 
+                    "wac_text_field_2" => "No",
+                    "wac_text_field_3" => "No",
+                    "wac_text_field_4" => "",
+                    );
+                        update_option('wac_settings', $arr);
+            }
         }
 
         /**
