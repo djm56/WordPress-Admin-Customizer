@@ -14,6 +14,8 @@ function login_css() {
         <style>
             #login h1 a { 
                 background-image: url("<?php echo $optionfield; ?>") !important;  
+                background-size: 312px;
+                width: 100%;
             }
         </style>
         <?php
