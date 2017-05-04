@@ -1,9 +1,15 @@
 <?php
+
+/* 
+ * @link              http://www.anomalous.co.za
+ * @since             1.0.0
+ * @package           wordpress-admin-customizer.
+ */
+
 add_action('admin_menu', 'wac_add_admin_menu');
 add_action('admin_init', 'wac_settings_init');
 
 function wac_add_admin_menu() {
-
     add_options_page('WPZA Admin', 'Admin Customizer', 'manage_options', 'wordpress_admin_customizer', 'wac_options_page');
 }
 
@@ -37,7 +43,6 @@ function wac_settings_init() {
     
 }
 
-
 function wac_text_field_0_render() {
     $options = get_option('wac_settings');
     ?>
@@ -54,12 +59,6 @@ function wac_text_field_1_render() {
     <?php
 }
 
-//function wac_text_field_2_render(  ) { 
-//	$options = get_option( 'wac_settings' );
-//        if($options['wac_text_field_2']) { $checked = ' checked="checked" '; } else { $checked = ''; };
-//	echo "<input ".$checked." id='plugin_chk1' name='wac_settings[wac_text_field_2]' type='checkbox' />";
-//        
-//}
 function wac_text_field_2_render() {
     $options = get_option('wac_settings');
     $items = array("Yes", "No");
@@ -68,13 +67,6 @@ function wac_text_field_2_render() {
         echo "<label><input " . $checked . " value='$item' name='wac_settings[wac_text_field_2]' type='radio' /> $item</label><br />";
     }
 }
-
-//function wac_text_field_3_render(  ) { 
-//	$options = get_option( 'wac_settings' );
-//        if($options['wac_text_field_3']) { $checked = ' checked="checked" '; } else { $checked = ''; };
-//	echo "<input ".$checked." id='plugin_chk1' name='wac_settings[wac_text_field_3]' type='checkbox' />";
-//        
-//}
 
 function wac_text_field_3_render() {
     $options = get_option('wac_settings');
@@ -89,7 +81,7 @@ function wac_text_field_4_render() {
     $options = get_option('wac_settings');
     ?>
     <input type='text' name='wac_settings[wac_text_field_4]' value='<?php echo sanitize_text_field($options['wac_text_field_4']); ?>'>
-    <p><small>Upload the image first to media then copy the url to this location.</small></p>
+    <p><small>Upload the image first to media then copy the url to this location 312 × 100.</small></p>
     <?php
 }
 
@@ -100,9 +92,7 @@ function wac_settings_section_callback() {
 function wac_options_page() {
     ?>
     <form action='options.php' method='post' enctype="multipart/form-data">
-
         <h1>Admin Customizer</h1>
-
     <?php
     settings_fields('pluginPage');
     do_settings_sections('pluginPage');
