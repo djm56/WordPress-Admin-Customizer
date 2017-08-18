@@ -13,7 +13,17 @@ function wac_add_admin_menu() {
     add_options_page('WPZA Admin', 'Admin Customizer', 'manage_options', 'wordpress_admin_customizer', 'wac_options_page');
 }
 
+
+
 function wac_settings_init() {
+    
+    if(function_exists( 'wp_enqueue_media' )){
+    wp_enqueue_media();
+}else{
+    wp_enqueue_style('thickbox');
+    wp_enqueue_script('media-upload');
+    wp_enqueue_script('thickbox');
+}
 
     register_setting('pluginPage', 'wac_settings');
 
@@ -55,7 +65,7 @@ function wac_text_field_1_render() {
     $options = get_option('wac_settings');
     ?>
     <textarea id="textarea_example" name="wac_settings[wac_text_field_1]" rows="5" cols="50"><?php echo $options['wac_text_field_1']; ?></textarea>
-    <p><small>This is a text box that appears on the dashboard</small></p>
+    <p><small>This is a widget box that appears on the admin dashboard</small></p>
     <?php
 }
 
@@ -80,13 +90,37 @@ function wac_text_field_3_render() {
 function wac_text_field_4_render() {
     $options = get_option('wac_settings');
     ?>
-    <input type='text' name='wac_settings[wac_text_field_4]' value='<?php echo sanitize_text_field($options['wac_text_field_4']); ?>'>
-    <p><small>Upload the image first to media then copy the url to this location 312 × 100.</small></p>
+    <img class="header_logo" src="<?php echo sanitize_text_field($options['wac_text_field_4']); ?>" /><br>
+    <input type='text' class='header_logo_url' name='wac_settings[wac_text_field_4]' value='<?php echo sanitize_text_field($options['wac_text_field_4']); ?>'>
+    <a href="#" class="header_logo_upload button button-primary">Upload</a>
+    <p><small>Upload the image that is 312px × 100px.</small></p>
+    <script>
+    jQuery(document).ready(function($) {
+        $('.header_logo_upload').click(function(e) {
+            e.preventDefault();
+
+            var custom_uploader = wp.media({
+                title: 'Custom Image',
+                button: {
+                    text: 'Upload Image'
+                },
+                multiple: false  // Set this to true to allow multiple files to be selected
+            })
+            .on('select', function() {
+                var attachment = custom_uploader.state().get('selection').first().toJSON();
+                $('.header_logo').attr('src', attachment.url);
+                $('.header_logo_url').val(attachment.url);
+
+            })
+            .open();
+        });
+    });
+</script>
     <?php
 }
 
 function wac_settings_section_callback() {
-    echo __('Update the WP-Admin with custom logo, description and details.', 'wordpress-admin-customizer');
+    echo __('Customize this WordPress Install with a custom login logo, and other description\'s and details.', 'wordpress-admin-customizer');
 }
 
 function wac_options_page() {
@@ -98,7 +132,7 @@ function wac_options_page() {
     do_settings_sections('pluginPage');
     submit_button();
     ?>
-        <p><small>Developed by WPZA. <a href="https://wpza.co.za">https://wpza.co.za</a></small></p>
+        <p><small>Developed by WPZA Website Maintenance Services. <a href="https://wpza.co.za">https://wpza.co.za</a></small></p>
     </form>
     <?php
 }
