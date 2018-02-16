@@ -10,7 +10,7 @@
  * Plugin Name:       WordPress Admin Customizer
  * Plugin URI:        https://github.com/djm56/WordPress-Admin-Customizer
  * Description:       Some simple changes to Admin, Login Logo, Admin Copyright and other simple changes.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            Donovan Maidens
  * Author URI:        https://wpza.co.za
  */
@@ -49,6 +49,8 @@ if (!class_exists("AdminCustomizerAnomalousPlugin")) {
                     "wac_text_field_2" => "No",
                     "wac_text_field_3" => "No",
                     "wac_text_field_4" => "",
+                    "wac_text_field_5" => "",
+                    "wac_text_field_6" => "",
                 );
                 update_option('wac_settings', $arr);
             }

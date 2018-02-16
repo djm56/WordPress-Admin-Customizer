@@ -9,6 +9,8 @@ function login_css() {
     wp_enqueue_style('custom-login', plugins_url('/assets/style.css', __FILE__));
     $options = get_option('wac_settings');
     $optionfield = sanitize_text_field($options['wac_text_field_4']);
+    $colorfield = sanitize_text_field($options['wac_text_field_5']);
+    $fontfield = sanitize_text_field($options['wac_text_field_6']);
     if (!empty($optionfield)) :
         ?>
         <style>
@@ -16,6 +18,25 @@ function login_css() {
                 background-image: url("<?php echo $optionfield; ?>") !important;  
                 background-size: 312px;
                 width: 100%;
+            } 
+        </style>
+        <?php
+    endif;
+    if (!empty($colorfield)) :
+        ?>
+        <style>
+            body.login {
+                background-color: <?php echo $colorfield; ?> !important;
+            }
+        </style>
+        <?php
+    endif;
+    if (!empty($fontfield)) :
+        ?>
+        <style>
+            body.login p#nav, body.login p#backtoblog,
+            body.login p#nav a, body.login p#backtoblog a {
+                color: <?php echo $fontfield; ?> !important;
             }
         </style>
         <?php

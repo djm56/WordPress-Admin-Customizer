@@ -8,8 +8,9 @@ This plugin is used to customize the wp-admin:
 2. Adds a custom dashboard item
 3. Logo for login page
 4. Removes all Dashboard items.
+5. Select Color for Login Page Background and Font
 
-Version: 1.1.0
+Version: 1.2.0
 
 ## How to Install
 
