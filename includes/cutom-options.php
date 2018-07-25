@@ -53,6 +53,9 @@ function wac_settings_init() {
             'wac_text_field_6', __('Login Font Color', 'wordpress-admin-customizer'), 'wac_text_field_6_render', 'pluginPage', 'wac_pluginPage_section'
     );
     add_settings_field(
+            'wac_text_field_7', __('Hide Desktop Widgets', 'wordpress-admin-customizer'), 'wac_text_field_7_render', 'pluginPage', 'wac_pluginPage_section'
+    );
+    add_settings_field(
             'wac_text_field_3', __('Restore Defaults Upon Reactivation?', 'wordpress-admin-customizer'), 'wac_text_field_3_render', 'pluginPage', 'wac_pluginPage_section'
     );
 }
@@ -139,6 +142,35 @@ function wac_text_field_6_render() {
     <?php
 }
 
+function wac_text_field_7_render() {
+    $options = get_option('wac_settings');
+    $checkedone = '';
+    $checkedtwo = '';
+    $checkedthree = '';
+    $checkedfour = '';
+    $checkedfive = '';
+    if ($options['wac_text_field_7']) {
+        $checkedone = ' checked="checked" ';
+    }
+    echo "<input " . $checkedone . " id='wac_text_field_7' name='wac_settings[wac_text_field_7]' type='checkbox' /> Hide Quick Draft<br>";
+    if ($options['wac_text_field_8']) {
+        $checkedtwo = ' checked="checked" ';
+    }
+    echo "<input " . $checkedtwo . " id='wac_text_field_8' name='wac_settings[wac_text_field_8]' type='checkbox' /> Hide Activity<br>";
+    if ($options['wac_text_field_9']) {
+        $checkedthree = ' checked="checked" ';
+    }
+    echo "<input " . $checkedthree . " id='wac_text_field_9' name='wac_settings[wac_text_field_9]' type='checkbox' /> Hide At A Glance<br>";
+    if ($options['wac_text_field_10']) {
+        $checkedfour = ' checked="checked" ';
+    }
+    echo "<input " . $checkedfour . " id='wac_text_field_10' name='wac_settings[wac_text_field_10]' type='checkbox' /> Hide WordPress News and Events<br>";
+    if ($options['wac_text_field_11']) {
+        $checkedfive = ' checked="checked" ';
+    }
+    echo "<input " . $checkedfive . " id='wac_text_field_11' name='wac_settings[wac_text_field_11]' type='checkbox' /> Hide Welcome Panel<br>";
+}
+
 function wac_settings_section_callback() {
     echo __('Customize this WordPress Install with a custom login logo, and other description\'s and details.', 'wordpress-admin-customizer');
 }
@@ -147,11 +179,11 @@ function wac_options_page() {
     ?>
     <form action='options.php' method='post' enctype="multipart/form-data">
         <h1>Admin Customizer</h1>
-        <?php
-        settings_fields('pluginPage');
-        do_settings_sections('pluginPage');
-        submit_button();
-        ?>
+    <?php
+    settings_fields('pluginPage');
+    do_settings_sections('pluginPage');
+    submit_button();
+    ?>
         <p><small>Developed by WPZA Website Maintenance Services. <a href="https://wpza.co.za">https://wpza.co.za</a></small></p>
     </form>
     <?php

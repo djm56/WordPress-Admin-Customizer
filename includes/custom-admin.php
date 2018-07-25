@@ -61,7 +61,7 @@ add_filter('admin_footer_text', 'remove_footer_admin');
 // Add a widget in WordPress Dashboard
 function wpc_dashboard_widget_function() {
     $options = get_option('wac_settings');
-    $optionfield = sanitize_text_field($options['wac_text_field_1']);
+    $optionfield = $options['wac_text_field_1'];
     echo $optionfield;
 }
 
@@ -76,15 +76,27 @@ function wpc_add_dashboard_widgets() {
 add_action('wp_dashboard_setup', 'wpc_add_dashboard_widgets');
 
 function remove_dashboard_widgets() {
-    remove_meta_box('dashboard_right_now', 'dashboard', 'normal');   // Right Now
-    remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal'); // Recent Comments
-    remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');  // Incoming Links
-    remove_meta_box('dashboard_plugins', 'dashboard', 'normal');   // Plugins
-    remove_meta_box('dashboard_activity', 'dashboard', 'normal');   // Plugins
-    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');  // Quick Press
-    remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side');  // Recent Drafts
-    remove_meta_box('dashboard_primary', 'dashboard', 'side');   // WordPress blog
-    remove_meta_box('dashboard_secondary', 'dashboard', 'side');   // Other WordPress News
+    $options = get_option('wac_settings');
+    if ($options['wac_text_field_9']) {
+        remove_meta_box('dashboard_right_now', 'dashboard', 'normal');   // Right Now
+    }
+    if ($options['wac_text_field_8']) {
+        remove_meta_box('dashboard_activity', 'dashboard', 'normal');   // Plugins
+    }
+    if ($options['wac_text_field_7']) {
+        remove_meta_box('dashboard_quick_press', 'dashboard', 'side');  // Quick Press
+    }
+    if ($options['wac_text_field_10']) {
+        remove_meta_box('dashboard_primary', 'dashboard', 'side');   // WordPress blog
+    }
+    if ($options['wac_text_field_11']) {
+        remove_action('welcome_panel', 'wp_welcome_panel'); // Welcome Panel
+    }
+//    remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal'); // Recent Comments
+//    remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal');  // Incoming Links
+//    remove_meta_box('dashboard_plugins', 'dashboard', 'normal');   // Plugins
+//    remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side');  // Recent Drafts
+//    remove_meta_box('dashboard_secondary', 'dashboard', 'side');   // Other WordPress News
     // use 'dashboard-network' as the second parameter to remove widgets from a network dashboard.
 }
 
